@@ -1,4 +1,4 @@
-﻿<Window
+<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
@@ -129,7 +129,7 @@
                     Background="#290914"
                     BorderThickness="0"
                     Padding="10">
-            <TabItem Header="Home" IsSelected="True">
+            <TabItem Header="Kezdőlap" IsSelected="True">
                 <TabItem.Resources>
                     <Style x:Key="SecondaryButton" TargetType="{x:Type Button}">
                         <Setter Property="Foreground" Value="White"/>
@@ -176,19 +176,19 @@
                     </Style>
                 </TabItem.Resources>
                 <Grid Background="#290914" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Privacy" FontSize="20"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Gaming" FontSize="20"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Files" FontSize="20"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Updates" FontSize="20"/>
-                    <Button x:Name="UniEdge"            Content="Uninstall Edge"                Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,12,0,0" VerticalAlignment="Top" Width="195" Click="button_Click"/>
-                    <Button x:Name="DisableAds"         Content="Disable Ads"                   Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="764,12,0,0" VerticalAlignment="Top" Width="168" Click="button_Click"/>
-                    <Button x:Name="DisableTelemetry"   Content="Disable Telemetry"              Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,12,0,0" VerticalAlignment="Top" Width="227" Click="button_Click"/>
-                    <Button x:Name="UltPwrPl"           Content="Enable Ultimate Power Plan"     Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,44,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
-                    <Button x:Name="StickyKeys"         Content="Disable Sticky Keys Hotkey"     Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,44,0,0" VerticalAlignment="Top" Width="227" Click="button_Click"/>
-                    <Button x:Name="CleanReBin"         Content="Clean Recycle Bin"              Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,75,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
-                    <Button x:Name="DelTmpFls"          Content="Delete temporary files"         Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,75,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
-                    <Button x:Name="ApplyUpdatePreset"  Content="Enable custom Windows Update presets" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,106,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
-                    <Button x:Name="RepairChoco"       Content="Repair/Update Chocolatey"        Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,106,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Adatvédelem" FontSize="20"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Játék" FontSize="20"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Fájlok" FontSize="20"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Frissítések" FontSize="20"/>
+                    <Button x:Name="UniEdge"            Content="Edge eltávolítása"                Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,12,0,0" VerticalAlignment="Top" Width="195" Click="button_Click"/>
+                    <Button x:Name="DisableAds"         Content="Hirdetések letiltása"                   Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="764,12,0,0" VerticalAlignment="Top" Width="168" Click="button_Click"/>
+                    <Button x:Name="DisableTelemetry"   Content="Telemetria letiltása"              Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,12,0,0" VerticalAlignment="Top" Width="227" Click="button_Click"/>
+                    <Button x:Name="UltPwrPl"           Content="Maximális teljesítmény energiaséma engedélyezése"     Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,44,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
+                    <Button x:Name="StickyKeys"         Content="Beragadó billentyűk gyorsbillentyű letiltása"     Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,44,0,0" VerticalAlignment="Top" Width="227" Click="button_Click"/>
+                    <Button x:Name="CleanReBin"         Content="Lomtár ürítése"              Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,75,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
+                    <Button x:Name="DelTmpFls"          Content="Ideiglenes fájlok törlése"         Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,75,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
+                    <Button x:Name="ApplyUpdatePreset"  Content="Egyedi Windows Update profilok engedélyezése" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="119,106,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
+                    <Button x:Name="RepairChoco"       Content="Chocolatey javítása/frissítése"        Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="532,106,0,0" VerticalAlignment="Top" Width="400" Click="button_Click"/>
                     <Border Background="#3D1A29"
         BorderBrush="#4A2E3A"
         BorderThickness="1"
@@ -261,32 +261,32 @@
                         </Border.Resources>
                         <StackPanel Margin="15">
                             <UniformGrid Columns="3" Rows="0" Margin="0,4,0,0">
-                                <CheckBox x:Name="cbClassicContextMenu" IsChecked="{x:Null}" Content="Classic Context Menu"
+                                <CheckBox x:Name="cbClassicContextMenu" IsChecked="{x:Null}" Content="Klasszikus helyi menü"
           IsThreeState="False"
           Checked="ToggleHandler"
           Unchecked="ToggleHandler" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbPowerThrottling" IsChecked="{x:Null}" Checked="ToggleHandler"
-          Unchecked="ToggleHandler"                  Content="Power Throttling" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler"                  Content="Teljesítmény-fojtás" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbWindowsUpdate" IsChecked="{x:Null}"                    Content="Windows Update" Checked="ToggleHandler"
           Unchecked="ToggleHandler" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbAnimations" IsChecked="{x:Null}"                        Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Visual Effects" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Vizuális effektusok" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbDarkTheme" IsChecked="{x:Null}"                          Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Dark Theme" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Sötét téma" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbWindowsCopilot" IsChecked="{x:Null}"                    Checked="ToggleHandler"
           Unchecked="ToggleHandler" Content="Windows Copilot" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbShowFileExtensions" IsChecked="{x:Null}"                Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Show File Extensions" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Fájlkiterjesztések megjelenítése" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbHibernation" IsChecked="{x:Null}"                       Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Hibernation" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Aktiválás / Hibernálás" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbVerboseLogon" IsChecked="{x:Null}"                      Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Verbose logon" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Részletes bejelentkezési napló" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbGameBar" IsChecked="{x:Null}"                           Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Game Mode" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Játék mód" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbExplorerThisPC" IsChecked="{x:Null}"                    Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Open File Explorer to This PC" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Fájlkezelő megnyitása az Ez a gép mappához" Margin="0,8,16,0"/>
                                 <CheckBox x:Name="cbWindowsErrorReporting" IsChecked="{x:Null}"             Checked="ToggleHandler"
-          Unchecked="ToggleHandler" Content="Windows Error Reporting" Margin="0,8,16,0"/>
+          Unchecked="ToggleHandler" Content="Windows hibajelentés" Margin="0,8,16,0"/>
                             </UniformGrid>
                         </StackPanel>
                     </Border>
@@ -297,7 +297,7 @@
                  TextWrapping="Wrap"
                  VerticalContentAlignment="Bottom"
                  IsReadOnly="True"
-                 Text="Welcome to XtremeShell!"
+                 Text="Üdvözöl az XtremeShell!"
                  Width="722"
                  Height="118"
                  BorderThickness="0"
@@ -307,16 +307,16 @@
                     <Border Background="#3D1A29" Margin="735,382,10,10" CornerRadius="8">
                         <StackPanel Orientation="Vertical" Margin="10">
                             <Button x:Name="bmNeonity" Content="Neonity" Style="{StaticResource SecondaryButton}" Click="button_Click" Margin="0,0,0,10"/>
-                            <Button x:Name="bmRebootUefi" Content="Reboot to UEFI" Style="{StaticResource PrimaryButton}" Click="button_Click" Margin="0,0,0,10"/>
-                            <Button x:Name="bmReboot" Content="Reboot" Style="{StaticResource PrimaryButton}" Click="button_Click" Margin="0,0,0,10"/>
-                            <Button x:Name="bmExit" Content="Exit" Style="{StaticResource PrimaryButton}" Click="button_Click"/>
+                            <Button x:Name="bmRebootUefi" Content="Újraindítás UEFI-be" Style="{StaticResource PrimaryButton}" Click="button_Click" Margin="0,0,0,10"/>
+                            <Button x:Name="bmReboot" Content="Újraindítás" Style="{StaticResource PrimaryButton}" Click="button_Click" Margin="0,0,0,10"/>
+                            <Button x:Name="bmExit" Content="Kilépés" Style="{StaticResource PrimaryButton}" Click="button_Click"/>
                         </StackPanel>
                     </Border>
-                    <Button x:Name="installEdge" Content="Undo Edge Redirections" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="319,12,0,0" VerticalAlignment="Top" Width="200" Click="button_Click"/>
-                    <Button x:Name="installVencord"         Content="Install Vencord"                   Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="764,44,0,0" VerticalAlignment="Top" Width="168" Click="button_Click"/>
+                    <Button x:Name="installEdge" Content="Edge átirányítások visszavonása" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="319,12,0,0" VerticalAlignment="Top" Width="200" Click="button_Click"/>
+                    <Button x:Name="installVencord"         Content="Vencord telepítése"                   Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="764,44,0,0" VerticalAlignment="Top" Width="168" Click="button_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Remove Apps">
+            <TabItem Header="Alkalmazások törlése">
                 <Grid Background="#290914" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -332,13 +332,13 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
                                 <TextBlock Text="📦" FontSize="24" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBlock Text="Installed Applications" 
+                                <TextBlock Text="Telepített alkalmazások" 
                               FontSize="20" 
                               FontWeight="Bold" 
                               Foreground="White" 
                               VerticalAlignment="Center"/>
                                 <TextBlock x:Name="PackageCountText" 
-                              Text="(Loading...)" 
+                              Text="(Betöltés...)" 
                               FontSize="14" 
                               Foreground="#B0B0B0" 
                               VerticalAlignment="Center" 
@@ -378,7 +378,7 @@
                                         </TextBox.Style>
                                     </TextBox>
                                     <TextBlock x:Name="SearchPlaceholder" 
-                                  Text="Search" 
+                                  Text="Keresés" 
                                   Foreground="#8B6F7F" 
                                   FontSize="14" 
                                   VerticalAlignment="Center" 
@@ -575,7 +575,7 @@
                        Visibility="Visible">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="⏳" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                                    <TextBlock Text="Loading installed applications..." 
+                                    <TextBlock Text="Telepített alkalmazások betöltése..." 
                                   FontSize="16" 
                                   Foreground="White" 
                                   HorizontalAlignment="Center"/>
@@ -593,7 +593,7 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                                 <CheckBox x:Name="SelectAllCheckBox" 
-                             Content="Select All" 
+                             Content="Összes kijelölése" 
                              Foreground="White" 
                              VerticalAlignment="Center"
                              Checked="SelectAllCheckBox_Checked"
@@ -655,7 +655,7 @@
                                     </CheckBox.Style>
                                 </CheckBox>
                                 <TextBlock x:Name="SelectedCountText" 
-                              Text="0 selected" 
+                              Text="0 kijelölve" 
                               Foreground="#B0B0B0" 
                               VerticalAlignment="Center" 
                               Margin="15,0,0,0"/>
@@ -667,7 +667,7 @@
                        CornerRadius="4"
                        MinWidth="90"
                        Margin="0,0,10,0">
-                                <Button Content="Refresh" 
+                                <Button Content="Frissítés" 
                            Background="Transparent" 
                            Foreground="White" 
                            BorderThickness="0" 
@@ -698,7 +698,7 @@
                        BorderThickness="1" 
                        CornerRadius="4">
                                 <Button x:Name="RemoveButton"
-                           Content="Remove Selected" 
+                           Content="Kijelöltek törlése" 
                            Background="Transparent" 
                            Foreground="White" 
                            BorderThickness="0" 
@@ -723,7 +723,7 @@
                     </Border>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="PackageStoreTab" Header="Package Store">
+            <TabItem x:Name="PackageStoreTab" Header="Csomagáruház">
                 <Grid Background="#290914" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -738,13 +738,13 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <TextBlock Text="Package Store" 
+                                <TextBlock Text="Csomagáruház" 
                   FontSize="20" 
                   FontWeight="Bold" 
                   Foreground="White" 
                   VerticalAlignment="Center"/>
                                 <TextBlock x:Name="InstallPackageCountText" 
-                  Text="(Search to browse)" 
+                  Text="(Keress a böngészéshez)" 
                   FontSize="14" 
                   Foreground="#B0B0B0" 
                   VerticalAlignment="Center" 
@@ -784,7 +784,7 @@
                                         </TextBox.Style>
                                     </TextBox>
                                     <TextBlock x:Name="InstallSearchPlaceholder" 
-                      Text="Search" 
+                      Text="Keresés" 
                       Foreground="#8B6F7F" 
                       FontSize="14" 
                       VerticalAlignment="Center" 
@@ -856,8 +856,8 @@
                                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
+                                                            <Grid.ColumnDefinitions Width="*"/>
+                                                            <Grid.ColumnDefinitions Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
                                                         <ScrollContentPresenter Grid.Column="0"/>
                                                         <ScrollBar Grid.Column="1" 
@@ -943,7 +943,7 @@
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="⏳" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                                     <TextBlock x:Name="InstallLoadingText" 
-                      Text="Searching packages..." 
+                      Text="Csomagok keresése..." 
                       FontSize="16" 
                       Foreground="White" 
                       HorizontalAlignment="Center"/>
@@ -955,12 +955,12 @@
            Visibility="Visible">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="📦" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,15"/>
-                                    <TextBlock Text="Search for packages to install" 
+                                    <TextBlock Text="Keress a telepíteni kívánt csomagokra" 
                       FontSize="18" 
                       Foreground="#B0B0B0" 
                       HorizontalAlignment="Center"
                       Margin="0,0,0,5"/>
-                                    <TextBlock Text="Try searching for packages like brave, git, or vscodium" 
+                                    <TextBlock Text="Próbálj meg olyan csomagokra keresni, mint a brave, git, vagy vscodium" 
                       FontSize="14" 
                       Foreground="#8B6F7F" 
                       HorizontalAlignment="Center"/>
@@ -978,7 +978,7 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                                 <CheckBox x:Name="InstallSelectAllCheckBox" 
-                 Content="Select All" 
+                 Content="Összes kijelölése" 
                  Foreground="White" 
                  VerticalAlignment="Center"
                  Checked="InstallSelectAllCheckBox_Checked"
@@ -1003,7 +1003,7 @@
                                     </CheckBox.Style>
                                 </CheckBox>
                                 <TextBlock x:Name="InstallSelectedCountText" 
-                  Text="0 selected" 
+                  Text="0 kijelölve" 
                   Foreground="#B0B0B0" 
                   />
                             </StackPanel>
@@ -1014,7 +1014,7 @@
            CornerRadius="4"
            MinWidth="90"
            Margin="0,0,10,0">
-                                <Button Content="Clear" 
+                                <Button Content="Kiürítés" 
                Background="Transparent" 
                Foreground="White" 
                BorderThickness="0" 
@@ -1045,7 +1045,7 @@
            BorderThickness="1" 
            CornerRadius="4">
                                 <Button x:Name="InstallButton"
-               Content="Install Selected" 
+               Content="Kijelöltek telepítése" 
                Background="Transparent" 
                Foreground="White" 
                BorderThickness="0" 
