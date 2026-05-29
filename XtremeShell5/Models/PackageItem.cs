@@ -9,7 +9,7 @@ namespace XtremeShell5
         public string Summary { get; set; } = string.Empty;
         public string Version { get; set; } = string.Empty;
 
-        private string _buttonText = "Select";
+        private string _buttonText = "Kiválasztás";
         public string ButtonText
         {
             get => _buttonText;
