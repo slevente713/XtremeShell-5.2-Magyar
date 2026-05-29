@@ -72,7 +72,7 @@ namespace XtremeShell5
                     }
 
                     _exitRequested = true;
-                    bmLog.Text = "Thanks for using XtremeShell!";
+                    bmLog.Text = "Köszönöm hogy használtad az XtremeShell-t!";
 
                     _ = Task.Run(async () =>
                     {
@@ -85,7 +85,7 @@ namespace XtremeShell5
                     break;
 
                 case "bmReboot":
-                    bmLog.Text = "Rebooting...";
+                    bmLog.Text = "Újraindítás...";
                     await Task.Delay(500);
                     Process.Start(new ProcessStartInfo
                     {
@@ -106,7 +106,7 @@ namespace XtremeShell5
                     break;
 
                 case "bmRebootUefi":
-                    bmLog.Text = "Rebooting to UEFI...";
+                    bmLog.Text = "Újraindítás az UEFI-be (vagy BIOS-ba)...";
                     await Task.Delay(500);
                     Process.Start(new ProcessStartInfo
                     {
@@ -127,12 +127,12 @@ namespace XtremeShell5
                     };
 
                     Process.Start(psi)?.WaitForExit();
-                    bmLog.Text = ("Enabled Ultimate Power Plan.");
+                    bmLog.Text = ("A Maximális teljesítmény energiagazdálkodási mód engedélyezve.");
                     break;
 
                 case "StickyKeys":
                     StickyKey.Toggle(enable: false);
-                    bmLog.Text = ("Disabled Sticky Keys Hotkey.");
+                    bmLog.Text = ("Beragadó billentyűk letiltva.");
                     break;
 
                 case "DisableAds":
@@ -189,7 +189,7 @@ namespace XtremeShell5
                         foreach (string app in apps)
                         {
                             Registry.SetValue(baseKey, app, 0, RegistryValueKind.DWord);
-                            bmLog.Text = $"Updated: {app}";
+                            bmLog.Text = $"Frissült: {app}";
                         }
 
                         Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
@@ -201,7 +201,7 @@ namespace XtremeShell5
                     }
                     catch (Exception ex)
                     {
-                        bmLog.Text = $"Error updating registry: {ex.Message}";
+                        bmLog.Text = $"Nem sikerült írni a Registry-be. Próbáld meg bekapcsolni a Remote Registry szolgáltatást! {ex.Message}";
                     }
 
 
@@ -276,7 +276,7 @@ reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo' /v '
 
                             Dispatcher.Invoke(() =>
                             {
-                                bmLog.Text = "Telemetry disabled.";
+                                bmLog.Text = "Az adatgyűjtés (Telementry) sikeresen letiltva.";
                             });
                         }
                         catch (Exception ex)
@@ -292,7 +292,7 @@ reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo' /v '
 
                 case "CleanReBin":
                     await RecycleBinClear.EmptyAsync();
-                    bmLog.Text = ("Cleaned Recycle Bin.");
+                    bmLog.Text = ("A lomtár kiürítve.");
                     break;
 
                 case "RepairChoco":
@@ -301,13 +301,13 @@ reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo' /v '
 
                 case "DelTmpFls":
                     CleanTempAndPrefetch();
-                    bmLog.Text = ("Deleted temporary files.");
+                    bmLog.Text = ("Az ideiglenes fájlok kitörölve.");
                     break;
 
                 case "ApplyUpdatePreset":
                     try
                     {
-                        bmLog.Text = "Please wait...";
+                        bmLog.Text = "Kérlek várj...";
 
                         // Create required keys (like New-Item -Force)
                         using (var polWin = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Policies\Microsoft\Windows"))
@@ -372,27 +372,27 @@ reg delete 'HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo' /v '
                             1,
                             RegistryValueKind.DWord);
 
-                        bmLog.Text = "Applied Update optimizations";
+                        bmLog.Text = "A Windows Update optimalizáció sikeresen befejeződött.";
                     }
                     catch (Exception ex)
                     {
-                        bmLog.Text = "Error: " + ex.Message;
+                        bmLog.Text = "Hiba: " + ex.Message;
                     }
                     break;
 
-                case "UniEdge":
-                    bmLog.Text = ("Please continue in PowerShell");
-                    string script = @"
+case "UniEdge":
+    bmLog.Text = ("Kérlek folytasd a folyamatot PowerShell-ben!");
+    string script = @"
 @(set ""0=%~f0""^)
-		sp 'HKCU:\Volatile Environment' 'Edge_Removal' @'
+        sp 'HKCU:\Volatile Environment' 'Edge_Removal' @'
 
 $also_remove_webview = 1
-write-host ""`nEdge will be completely uninstalled.""
-write-host ""`nALERT: You will NOT be able to reinstall Microsoft Edge after running this script!""
-$uconfirmation = Read-Host ""`nContinue? [Y/N]""
+write-host ""`nAz Edge teljes mértékben el lesz távolítva.""
+write-host ""`nFIGYELMEZTETÉS: A szkript futtatása után NEM fogod tudni újratelepíteni a Microsoft Edge-et!""
+$uconfirmation = Read-Host ""`nFolytatod? [Y/N]""
 if ($uconfirmation -ne ""Y"") { exit }
-$host.ui.RawUI.WindowTitle = 'XtremeShell Edge Uninstaller '
-write-host ""`nStarting... Please wait!""
+$host.ui.RawUI.WindowTitle = 'XtremeShell Edge Eltávolító '
+write-host ""`nIndítás... Kérlek várj!""
 ## targets
 $remove_win32 = @(""Microsoft Edge"",""Microsoft Edge Update""); $remove_appx = @(""MicrosoftEdge"")
 if ($also_remove_webview -eq 1) {$remove_win32 += ""Microsoft EdgeWebView""; $remove_appx += ""Win32WebViewHost""}
@@ -483,7 +483,7 @@ $OpenWebSearch = @$
 @title OpenWebSearch Redux & echo off & set ?= open start menu web search, widgets links or help in your chosen browser
 for /f %%E in ('""prompt $E$S& for %%e in (1) do rem""') do echo;%%E[2t 2>nul & rem AveYo: minimize prompt
 call :reg_var ""HKCU\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice"" ProgID ProgID
-if /i ""%ProgID%"" equ ""MSEdgeHTM"" echo;Default browser is set to Edge! Change it or remove OpenWebSearch script. & pause & exit /b
+if /i ""%ProgID%"" equ ""MSEdgeHTM"" echo;Az alapertelmezett bongeszo az Edge! Valtoztasd meg, vagy tavolitsd el az OpenWebSearch szkriptet. & pause & exit /b
 call :reg_var ""HKCR\%ProgID%\shell\open\command"" """" Browser
 set Choice=& for %%. in (%Browser%) do if not defined Choice set ""Choice=%%~.""
 call :reg_var ""HKCR\MSEdgeMHT\shell\open\command"" """" FallBack
@@ -531,45 +531,45 @@ $@
 $cleanup = gp 'Registry::HKEY_Users\S-1-5-21*\Volatile*' Edge_Removal -ea 0
 if ($cleanup) {rp $cleanup.PSPath Edge_Removal -force -ea 0}
 
-write-host -nonew -fore green -back black ""`n EDGE REMOVED!""; 
+write-host -nonew -fore green -back black ""`n AZ EDGE ELTÁVOLÍTVA!""; 
 exit
 
 ## ask to run script as admin
 '@.replace(""$@"", ""'@"").replace(""@$"", ""@'"") -force -ea 0;
-		$A = '-nop -noe -c & {iex((gp ''Registry::HKEY_Users\S-1-5-21*\Volatile*'' Edge_Removal -ea 0)[0].Edge_Removal)}'
-		start powershell -args $A -verb runas
-		$_Press_Enter
+        $A = '-nop -noe -c & {iex((gp ''Registry::HKEY_Users\S-1-5-21*\Volatile*'' Edge_Removal -ea 0)[0].Edge_Removal)}'
+        start powershell -args $A -verb runas
+        $_Press_Enter
 ";
 
-                    byte[] scriptBytes = Encoding.Unicode.GetBytes(script);
+        byte[] scriptBytes = Encoding.Unicode.GetBytes(script);
 
-                    string base64Script = Convert.ToBase64String(scriptBytes);
+        string base64Script = Convert.ToBase64String(scriptBytes);
 
-                    var stickyPsi = new ProcessStartInfo
-                    {
-                        FileName = "powershell.exe",
-                        Arguments = $"-NoProfile -ExecutionPolicy Bypass -EncodedCommand {base64Script}",
-                        UseShellExecute = true,
-                        Verb = "runas",
-                        WindowStyle = ProcessWindowStyle.Normal
-                    };
+        var stickyPsi = new ProcessStartInfo
+        {
+            FileName = "powershell.exe",
+            Arguments = $"-NoProfile -ExecutionPolicy Bypass -EncodedCommand {base64Script}",
+            UseShellExecute = true,
+            Verb = "runas",
+            WindowStyle = ProcessWindowStyle.Normal
+        };
 
-                    try
-                    {
-                        Process.Start(stickyPsi);
-                    }
-                    catch (Exception ex)
-                    {
-                        bmLog.Text = ("PowerShell execution failed or cancelled: " + ex.Message);
-                    }
-                    break;
+        try
+        {
+            Process.Start(stickyPsi);
+        }
+        catch (Exception ex)
+        {
+            bmLog.Text = ("A PowerShell végrehajtás sikertelen vagy megszakadt: " + ex.Message);
+        }
+        break;
 
-                case "installEdge":
-                    string UndoEdgeScript = @"
-				Remove-Item -Path ""HKCR:\microsoft-edge"" -Recurse -Force -ErrorAction SilentlyContinue
-	Remove-Item -Path ""HKCR:\MSEdgeHTM"" -Recurse -Force -ErrorAction SilentlyContinue
-	
-	$ifeoPaths = @(
+    case "installEdge":
+        string UndoEdgeScript = @"
+    Remove-Item -Path ""HKCR:\microsoft-edge"" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path ""HKCR:\MSEdgeHTM"" -Recurse -Force -ErrorAction SilentlyContinue
+    
+    $ifeoPaths = @(
     'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ie_to_edge_stub.exe',
     'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msedge.exe'
 )
@@ -577,69 +577,69 @@ foreach ($path in $ifeoPaths)
 {
     Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
 }
-	
-	$fakeStub = Join-Path $env:SystemDrive ""Scripts\ie_to_edge_stub.exe""
+    
+    $fakeStub = Join-Path $env:SystemDrive ""Scripts\ie_to_edge_stub.exe""
 
-	if (Test-Path $fakeStub)
-	{
-		Remove-Item $fakeStub -Force -ErrorAction SilentlyContinue
-	}
+    if (Test-Path $fakeStub)
+    {
+        Remove-Item $fakeStub -Force -ErrorAction SilentlyContinue
+    }
 ";
 
-                    await Task.Run(() =>
+        await Task.Run(() =>
+        {
+            try
+            {
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -NonInteractive -WindowStyle Hidden -Command \"{UndoEdgeScript}\"",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using var process = new Process { StartInfo = psi };
+                process.OutputDataReceived += (s, e) =>
+                {
+                    if (!string.IsNullOrEmpty(e.Data))
                     {
-                        try
+                        Dispatcher.Invoke(() =>
                         {
-                            var psi = new ProcessStartInfo
-                            {
-                                FileName = "powershell.exe",
-                                Arguments = $"-NoProfile -NonInteractive -WindowStyle Hidden -Command \"{UndoEdgeScript}\"",
-                                RedirectStandardOutput = true,
-                                RedirectStandardError = true,
-                                UseShellExecute = false,
-                                CreateNoWindow = true
-                            };
-
-                            using var process = new Process { StartInfo = psi };
-                            process.OutputDataReceived += (s, e) =>
-                            {
-                                if (!string.IsNullOrEmpty(e.Data))
-                                {
-                                    Dispatcher.Invoke(() =>
-                                    {
-                                        bmLog.Text = (e.Data + Environment.NewLine);
-                                        bmLog.ScrollToEnd();
-                                    });
-                                }
-                            };
-                            process.ErrorDataReceived += (s, e) =>
-                            {
-                                if (!string.IsNullOrEmpty(e.Data))
-                                {
-                                    Dispatcher.Invoke(() =>
-                                    {
-                                        bmLog.AppendText(e.Data + Environment.NewLine);
-                                        bmLog.ScrollToEnd();
-                                    });
-                                }
-                            };
-
-                            process.Start();
-                            process.BeginOutputReadLine();
-                            process.BeginErrorReadLine();
-                            process.WaitForExit();
-                        }
-                        catch (Exception ex)
+                            bmLog.Text = (e.Data + Environment.NewLine);
+                            bmLog.ScrollToEnd();
+                        });
+                    }
+                };
+                process.ErrorDataReceived += (s, e) =>
+                {
+                    if (!string.IsNullOrEmpty(e.Data))
+                    {
+                        Dispatcher.Invoke(() =>
                         {
-                            Dispatcher.Invoke(() =>
-                            {
-                                bmLog.AppendText("Exception: " + ex.Message + Environment.NewLine);
-                                bmLog.ScrollToEnd();
-                            });
-                        }
-                    });
-                    bmLog.Text = "Removed Microsoft Edge redirections, Edge can be reinstalled.";
-                    break;
+                            bmLog.AppendText(e.Data + Environment.NewLine);
+                            bmLog.ScrollToEnd();
+                        });
+                    }
+                };
+
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    box.AppendText("Kivétel: " + ex.Message + Environment.NewLine);
+                    bmLog.ScrollToEnd();
+                });
+            }
+        });
+        bmLog.Text = "A Microsoft Edge átirányítások törölve, az Edge most már újratelepíthető.";
+        break;
 
                 case "installVencord":
                     await InstallVencordAsync();
@@ -684,7 +684,7 @@ foreach ($path in $ifeoPaths)
                             if (total.HasValue)
                             {
                                 var pct = (int)(totalRead * 100 / total.Value);
-                                bmLog.Text = $"Downloading Vencord installer executable... {pct}%";
+                                bmLog.Text = $"Vencord telepítő letöltése... {pct}%";
                             }
                         }
                     }
@@ -692,11 +692,11 @@ foreach ($path in $ifeoPaths)
 
                 if (!File.Exists(installerPath))
                 {
-                    bmLog.Text = "ERROR: Failed to download the installer.";
+                    bmLog.Text = "HIBA: Nem sikerült letölteni a Vencord telepítőt.";
                     return;
                 }
 
-                bmLog.Text = "Download complete. Running the installer...";
+                bmLog.Text = "A letöltés sikeresen megtörtént. Telepítő futtatása...";
 
                 var tcs = new TaskCompletionSource<int>();
                 var proc = new Process
@@ -719,7 +719,7 @@ foreach ($path in $ifeoPaths)
 
                 if (!proc.Start())
                 {
-                    bmLog.Text = "ERROR: Could not start the installer.";
+                    bmLog.Text = "HIBA: Nem sikerült elindítani a telepítőt.";
                     return;
                 }
 
@@ -727,11 +727,11 @@ foreach ($path in $ifeoPaths)
 
                 bmLog.Text = exitCode == 0
                     ? ""
-                    : $"Installer finished with exit code {exitCode}.";
+                    : $"A telepítés sikerült ezzel az exit code-al: {exitCode}.";
             }
             catch (Exception ex)
             {
-                bmLog.Text = $"ERROR: {ex.Message}";
+                bmLog.Text = $"HIBA: {ex.Message}";
             }
         }
 
@@ -739,7 +739,7 @@ foreach ($path in $ifeoPaths)
         {
             Dispatcher.Invoke(() =>
             {
-                bmLog.Text = "Starting to delete temporary files...";
+                bmLog.Text = "Ideiglenes fájlok törlése...";
             });
         }
 
@@ -749,7 +749,7 @@ foreach ($path in $ifeoPaths)
             {
                 if (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath))
                 {
-                    AppendLog($"Skip: '{folderPath}' does not exist.");
+                    AppendLog($"Átugrás: '{folderPath}' nem létezik. :(");
                     return;
                 }
 
@@ -766,7 +766,7 @@ foreach ($path in $ifeoPaths)
                     }
                     catch (Exception ex)
                     {
-                        AppendLog($"  File in use/locked: {IOPath.GetFileName(file)} — {ex.Message}");
+                        AppendLog($"  A fájl használatban van, vagy zárolva van: {IOPath.GetFileName(file)} — {ex.Message}");
                     }
                 }
 
@@ -781,7 +781,7 @@ foreach ($path in $ifeoPaths)
                     }
                     catch (Exception ex)
                     {
-                        AppendLog($"  Folder locked: {IOPath.GetFileName(dir)} — {ex.Message}");
+                        AppendLog($"  Mappa zárolva: {IOPath.GetFileName(dir)} — {ex.Message}");
                     }
                 }
 
@@ -789,7 +789,7 @@ foreach ($path in $ifeoPaths)
             }
             catch (Exception ex)
             {
-                AppendLog($"Error on '{folderPath}': {ex.Message}");
+                AppendLog($"Hiba történt a '{folderPath}': {ex.Message}");
             }
         }
 
@@ -818,13 +818,13 @@ foreach ($path in $ifeoPaths)
             // C:\Windows\Prefetch
             string prefetch = IOPath.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Prefetch");
 
-            AppendLog("Starting cleanup...");
+            AppendLog("Tisztítás megkezdése...");
 
             DeleteFolderContents(userTemp);
             DeleteFolderContents(winTemp);
             DeleteFolderContents(prefetch);
 
-            AppendLog("Cleanup finished.");
+            AppendLog("A tisztítás sikerült.");
         }
 
 
@@ -918,7 +918,7 @@ foreach ($path in $ifeoPaths)
         private async void LoadPackagesAsync()
         {
             LoadingPanel.Visibility = Visibility.Visible;
-            PackageCountText.Text = "(Loading...)";
+            PackageCountText.Text = "(Betöltés...)";
 
             await Task.Run(() =>
             {
@@ -941,7 +941,7 @@ foreach ($path in $ifeoPaths)
                 catch (Exception ex)
                 {
                     Dispatcher.Invoke(() =>
-                        MessageBox.Show($"Error loading packages: {ex.Message}", "Error",
+                        MessageBox.Show($"Hiba történt a csomagok betöltésekor: {ex.Message}", "Hiba",
                             MessageBoxButton.OK, MessageBoxImage.Error));
                 }
 
@@ -990,7 +990,7 @@ foreach ($path in $ifeoPaths)
             }
 
             var filteredList = filtered.ToList();
-            System.Diagnostics.Debug.WriteLine($"Filtered results: {filteredList.Count}");
+            System.Diagnostics.Debug.WriteLine($"Kiszűrt eredmények: {filteredList.Count}");
 
             // Update the filtered collection on UI thread
             Dispatcher.Invoke(() =>
@@ -1003,7 +1003,7 @@ foreach ($path in $ifeoPaths)
                 foreach (var package in filteredList)
                 {
                     filteredPackages.Add(package);
-                    System.Diagnostics.Debug.WriteLine($"Added: {package.DisplayName}");
+                    System.Diagnostics.Debug.WriteLine($"Hozzáadva: {package.DisplayName}");
                 }
 
                 PackageList.ItemsSource = filteredPackages;
@@ -1020,7 +1020,7 @@ foreach ($path in $ifeoPaths)
                     : $"({filteredCount} of {totalCount} applications)";
             }
 
-            System.Diagnostics.Debug.WriteLine($"Final filtered count: {filteredPackages.Count}");
+            System.Diagnostics.Debug.WriteLine($"Végső kiszűrt érték: {filteredPackages.Count}");
         }
 
         private void UpdateSelectionCount()
@@ -1091,15 +1091,15 @@ foreach ($path in $ifeoPaths)
 
             if (selectedPackages.Count == 0)
             {
-                MessageBox.Show("No applications selected for removal.", "Information",
+                MessageBox.Show("Nincsenek kiválasztva alkalmazások, amiket le lehetne törölni.", "Információ",
                               MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             var result = MessageBox.Show(
-                $"Are you sure you want to uninstall {selectedPackages.Count} selected application(s)?\n\n" +
-                "This action cannot be undone.",
-                "Confirm Uninstall",
+                $"Szeretnél törölni {selectedPackages.Count} programo(ka)t?\n\n" +
+                "Ez a cselekmény nem vonható vissza.",
+                "Törlés megerősítése",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
 
@@ -1107,8 +1107,8 @@ foreach ($path in $ifeoPaths)
                 return;
 
             RemoveButton.IsEnabled = false;
-            var originalText = RemoveButton.Content?.ToString() ?? "Remove";
-            RemoveButton.Content = "⏳ Removing...";
+            var originalText = RemoveButton.Content?.ToString() ?? "Eltávolítás";
+            RemoveButton.Content = "⏳ Eltávolítás...";
 
             try
             {
@@ -1210,8 +1210,8 @@ foreach ($path in $ifeoPaths)
                                 // Nothing actionable found for this entry
                                 Dispatcher.Invoke(() =>
                                 {
-                                    MessageBox.Show($"No uninstall method for {package.DisplayName}.",
-                                        "Uninstall", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show($"Nem található törlési módszer ez(ek) eltávolítására: {package.DisplayName}.",
+                                        "Törlés", MessageBoxButton.OK, MessageBoxImage.Information);
                                 });
                             }
                         }
@@ -1219,8 +1219,8 @@ foreach ($path in $ifeoPaths)
                         {
                             Dispatcher.Invoke(() =>
                             {
-                                MessageBox.Show($"Failed to uninstall {package.DisplayName}: {ex.Message}",
-                                              "Uninstall Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show($"Nem sikerült törölni: {package.DisplayName}: {ex.Message}",
+                                              "Törlési hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
                             });
                         }
                     }
@@ -1247,24 +1247,36 @@ foreach ($path in $ifeoPaths)
         // Default packages
         private readonly List<PackageItem> _defaultPackages = new()
 {
-    new PackageItem { Title = "7zip",               Summary = "7-Zip"},
-    new PackageItem { Title = "brave",              Summary = "Brave Browser"},
-    new PackageItem { Title = "discord",            Summary = "Discord Desktop"},
-    new PackageItem { Title = "docker",             Summary = "Docker Desktop"},
-    new PackageItem { Title = "edge",               Summary = "Microsoft Edge"},
-    new PackageItem { Title = "epicgameslauncher",  Summary = "Epic Games Launcher"},
-    new PackageItem { Title = "firefox",            Summary = "Firefox"},
-    new PackageItem { Title = "git",                Summary = "Git"},
-    new PackageItem { Title = "hwinfo",             Summary = "HWiNFO"},
-    new PackageItem { Title = "mobaxterm",          Summary = "MobaXterm"},
-    new PackageItem { Title = "obs-studio",         Summary = "OBS Studio"},
-    new PackageItem { Title = "powertoys",          Summary = "Microsoft PowerToys"},
-    new PackageItem { Title = "python",             Summary = "Python"},
-    new PackageItem { Title = "spotify",            Summary = "Spotify"},
-    new PackageItem { Title = "steam",              Summary = "Steam"},
-    new PackageItem { Title = "vlc",                Summary = "VLC Media Player"},
-    new PackageItem { Title = "vscodium",           Summary = "VSCodium"},
-    new PackageItem { Title = "winscp",             Summary = "WinSCP"},
+    new PackageItem { Title = "7zip",                   Summary = "7-Zip"},
+    new PackageItem { Title = "brave",                  Summary = "Brave Browser"},
+    new PackageItem { Title = "discord",                Summary = "Discord Desktop"},
+    new PackageItem { Title = "docker",                 Summary = "Docker Desktop"},
+    new PackageItem { Title = "edge",                   Summary = "Microsoft Edge"},
+    new PackageItem { Title = "epicgameslauncher",      Summary = "Epic Games Launcher"},
+    new PackageItem { Title = "firefox",                Summary = "Firefox"},
+    new PackageItem { Title = "git",                    Summary = "Git"},
+    new PackageItem { Title = "hwinfo",                 Summary = "HWiNFO"},
+    new PackageItem { Title = "mobaxterm",              Summary = "MobaXterm"},
+    new PackageItem { Title = "obs-studio",             Summary = "OBS Studio"},
+    new PackageItem { Title = "powertoys",              Summary = "Microsoft PowerToys"},
+    new PackageItem { Title = "python",                 Summary = "Python"},
+    new PackageItem { Title = "spotify",                Summary = "Spotify"},
+    new PackageItem { Title = "steam",                  Summary = "Steam"},
+    new PackageItem { Title = "vlc",                    Summary = "VLC Media Player"},
+    new PackageItem { Title = "vscodium",               Summary = "VSCodium"},
+    new PackageItem { Title = "winscp",                 Summary = "WinSCP"},
+	new PackageItem { Title = "powershell-core",        Summary = "PowerShell 7"},
+	new PackageItem { Title = "librewolf",              Summary = "LibreWolf"},
+	new PackageItem { Title = "k-litecodecpackfull",    Summary = "K-Lite Codecs"},
+	new PackageItem { Title = "ojdkbuild8jre",          Summary = "Java Runtime Envirement (JRE)"},
+	new PackageItem { Title = "gimp",                   Summary = "GIMP"},
+	new PackageItem { Title = "notepadplusplus",        Summary = "Notepad++"},
+	new PackageItem { Title = "peazip",                 Summary = "PeaZip"},
+	new PackageItem { Title = "revouninstaller.free",   Summary = "Revo uninstaller free"},
+	new PackageItem { Title = "googlechrome",           Summary = "Google Chrome"},
+	new PackageItem { Title = "pchealthcheck",          Summary = "PC Health Check"},
+	new PackageItem { Title = "wiztree",                Summary = "WizTree"},
+	new PackageItem { Title = "dotnet-sdk",             Summary = ".NET SDK"},
 };
 
 
@@ -1507,8 +1519,8 @@ foreach ($path in $ifeoPaths)
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     System.Windows.MessageBox.Show(
-                        $"'{p.DisplayName}' is currently running. Please close it and click OK to retry.",
-                        "App In Use", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                        $"'{p.DisplayName}' az jelenleg fut. Kérlek zárd be, és nyomj az OK-ra, majd próbáld újra.",
+                        "Alkalmazás használatban", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 });
 
                 var retry = await pm.RemovePackageAsync(p.PackageFullName, RemovalOptions.None)
@@ -1517,23 +1529,23 @@ foreach ($path in $ifeoPaths)
                 if (IsSuccess(retry)) return;
 
                 throw new InvalidOperationException(BuildError(
-                    $"Failed to remove '{p.DisplayName}' after retry.", retry));
+                    $"Nem sikerült eltávolítani '{p.DisplayName}' újraindítás után.", retry));
             }
 
             if (hr == HR_ACCESS_DENIED)
             {
                 throw new InvalidOperationException(
-                    "Access denied. Try running this app as Administrator.");
+                    "Elérés megtagadva. Próbáld meg az alkalmazást rendszergazdaként futtatni.");
             }
 
             if (hr == HR_PACKAGE_NOTFOUND)
             {
                 throw new InvalidOperationException(
-                    "Package not found for the current user.");
+                    "A csomag nem található a jelenlegi felhasználóban.");
             }
 
             throw new InvalidOperationException(BuildError(
-                $"Failed to remove '{p.DisplayName}'.", first));
+                $"Nem sikerült eltávolítani: '{p.DisplayName}'.", first));
         }
 
         private static bool IsSuccess(DeploymentResult r) =>
@@ -1548,13 +1560,13 @@ foreach ($path in $ifeoPaths)
 
         private static string ExplainHr(int hr) => hr switch
         {
-            unchecked((int)0x80073D02) => "The app is in use. Close it and try again.",
-            unchecked((int)0x80073CF1) => "Package not found.",
-            unchecked((int)0x80073CFA) => "Removal failed. The package may be system-protected or blocked by policy.",
-            unchecked((int)0x80073CF6) => "Generic deployment failure.",
+            unchecked((int)0x80073D02) => "Az alkalmazás használatban van.",
+            unchecked((int)0x80073CF1) => "A csomag nem található.",
+            unchecked((int)0x80073CFA) => "Az eltávolítás nem sikerült. A csomag talán rendszervédett vagy blokkolva van a csoportházirend (gpedit.msc) által.",
+            unchecked((int)0x80073CF6) => "Általános telepítési hiba.",
             unchecked((int)0x80073D21) => "Operation blocked by policy (system/inbox app).",
-            unchecked((int)0x80070005) => "Access denied.",
-            _ => "Unknown deployment error."
+            unchecked((int)0x80070005) => "Elérés megtagadva.",
+            _ => "Nem ismert telepítési hiba."
         };
 
         private static string CleanPublisher(string raw)
@@ -1586,7 +1598,7 @@ foreach ($path in $ifeoPaths)
             _packages.Clear();
             InstallLoadingPanel.Visibility = Visibility.Visible;
             InstallEmptyStatePanel.Visibility = Visibility.Collapsed;
-            InstallPackageCountText.Text = exactMode ? "(Exact search...)" : "(Searching...)";
+            InstallPackageCountText.Text = exactMode ? "(Pontos keresés...)" : "(Keresés...)";
 
             try
             {
@@ -1646,7 +1658,7 @@ foreach ($path in $ifeoPaths)
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching packages:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Hiba történt a csomagok keresésekor:\n{ex.Message}", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 InstallEmptyStatePanel.Visibility = Visibility.Visible;
             }
             finally
@@ -1724,7 +1736,7 @@ foreach ($path in $ifeoPaths)
 
             InstallSearchTextBox.Text = "";
             ShowDefaultPackages();
-            InstallPackageCountText.Text = $"{_packages.Count} recommended packages";
+            InstallPackageCountText.Text = $"{_packages.Count} javasolt csomagok";
         }
 
 
@@ -1733,15 +1745,15 @@ foreach ($path in $ifeoPaths)
             if (_selectedPackages.Count == 0) return;
 
             var confirm = MessageBox.Show(
-                $"Are you sure you want to install {_selectedPackages.Count} package(s)?",
-                "Confirm Install",
+                $"Szeretnéd telepíteni a(z) {_selectedPackages.Count} csomago(ka)t?",
+                "Telepítéss megerősítése",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
             if (confirm != MessageBoxResult.Yes) return;
 
             var originalText = InstallButton.Content.ToString();
-            InstallButton.Content = "Installing...";
+            InstallButton.Content = "Telepítés...";
             InstallButton.IsEnabled = false;
             InstallButtonBorder.Background = System.Windows.Media.Brushes.Gray;
 
@@ -1793,11 +1805,11 @@ foreach ($path in $ifeoPaths)
 
             if (state == null)
             {
-                bmLog.Text = $"No change ({cb.Content})";
+                bmLog.Text = $"Nem változott ({cb.Content})";
                 return;
             }
 
-            bmLog.Text = "Please wait...";
+            bmLog.Text = "Kérlek várj...";
             cb.IsEnabled = false;
 
             try
@@ -1807,67 +1819,67 @@ foreach ($path in $ifeoPaths)
                     case "cbClassicContextMenu":
                         await Task.Run(() => ToggleClassicContextMenu(state == true));
                         bmLog.Text = state == true
-                            ? "Classic context menu restored"
-                            : "Original context menu restored";
+                            ? "A klasszikus jobbklikk menü visszaállítva."
+                            : "A klasszikus jobbklikk menü visszaállítva.";
                         break;
 
                     case "cbPowerThrottling":
                         await Task.Run(() => TogglePowerThrottling(state == true));
                         bmLog.Text = state == true
-                            ? "Enabled Power Throttling"
-                            : "Disabled Power Throttling";
+                            ? "Power throttling engedélyezve."
+                            : "Power throttling letiltva.";
                         break;
 
                     case "cbWindowsUpdate":
                         await Task.Run(() => ToggleWindowsUpdate(state == true));
                         bmLog.Text = state == true
-                            ? "Windows Update enabled"
-                            : "Windows Update disabled";
+                            ? "Windows Update engedélyezve."
+                            : "Windows Update letiltva.";
                         break;
 
                     case "cbAnimations":
                         await Task.Run(() => ToggleAnimations(state == true));
-                        bmLog.Text = state == true ? "Enabled Visual Effects" : "Disabled Visual Effects";
+                        bmLog.Text = state == true ? "Felesleges animációk engedélyezve." : "Felesleges animációk letiltva.";
                         break;
 
                     case "cbDarkTheme":
                         await Task.Run(() => ToggleDarkTheme(state == true));
-                        bmLog.Text = state == true ? "Dark theme enabled" : "Light theme enabled";
+                        bmLog.Text = state == true ? "Sötét téma engedélyezve." : "Világos téma engedélyezve.";
                         break;
 
                     case "cbWindowsCopilot":
                         await Task.Run(() => ToggleWindowsCopilot(state == true));
-                        bmLog.Text = state == true ? "Windows Copilot enabled" : "Windows Copilot disabled";
+                        bmLog.Text = state == true ? "Windows Copilot engedélyezve" : "Windows Copilot letiltva";
                         break;
 
                     case "cbShowFileExtensions":
                         await Task.Run(() => ToggleShowFileExtensions(state == true));
-                        bmLog.Text = state == true ? "File extensions are visible" : "File extensions are hidden";
+                        bmLog.Text = state == true ? "A fájlkiterjesztések mostantól meg vannak jelenítve." : "A fájlkiterjesztések mostantól el vannak rejtve.";
                         break;
 
                     case "cbHibernation":
                         await Task.Run(() => ToggleHibernation(state == true));
-                        bmLog.Text = state == true ? "Hibernation enabled" : "Hibernation disabled";
+                        bmLog.Text = state == true ? "Hibernálás engedélyezve." : "Hibernálás letiltva.";
                         break;
 
                     case "cbVerboseLogon":
                         await Task.Run(() => ToggleVerboseLogon(state == true));
-                        bmLog.Text = state == true ? "Verbose logon enabled" : "Verbose logon disabled";
+                        bmLog.Text = state == true ? "Verbose logon engedélyezve." : "Verbose logon letiltva.";
                         break;
 
                     case "cbGameBar":
                         await Task.Run(() => ToggleGameBar(state == true));
-                        bmLog.Text = state == true ? "Game Mode enabled" : "Game Mode disabled";
+                        bmLog.Text = state == true ? "Game Mode engedélyezve." : "Game Mode letiltva.";
                         break;
 
                     case "cbExplorerThisPC":
                         await Task.Run(() => ToggleExplorerThisPC(state == true));
-                        bmLog.Text = state == true ? "Explorer opens to This PC" : "Explorer opens to Quick Access";
+                        bmLog.Text = state == true ? "A fájlkezelő mostantól az Ez a gép menübe nyílik meg." : "A fájlkezelő mostantól a gyors elérésbe nyílik meg.";
                         break;
 
                     case "cbWindowsErrorReporting":
                         await Task.Run(() => ToggleWindowsErrorReporting(state == true));
-                        bmLog.Text = state == true ? "Windows Error Reporting enabled" : "Windows Error Reporting disabled";
+                        bmLog.Text = state == true ? "Windows Error Reporting engedélyezve." : "Windows Error Reporting letiltva.";
                         break;
 
 
@@ -1878,7 +1890,7 @@ foreach ($path in $ifeoPaths)
             }
             catch (Exception ex)
             {
-                bmLog.Text = "Error: " + ex.Message;
+                bmLog.Text = "Hiba: " + ex.Message;
             }
             finally
             {
