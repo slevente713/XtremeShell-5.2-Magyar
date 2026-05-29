@@ -18,21 +18,21 @@ namespace XtremeShell5
                 return;
 
             var result = MessageBox.Show(
-                "Chocolatey is not installed. Do you want to install it now?",
+                "A Chocolatey nincs telepítve. Szeretnéd telepíteni most?",
                 "Chocolatey",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
-                bmLog.Text = "Installing Chocolatey...";
+                bmLog.Text = "A Chocolatey telepítése folyamatban van... Kérlek várj!";
                 bool installed = await InstallChocolateyAsync();
 
                 if (!installed)
                 {
                     bmLog.Text = string.Empty;
                     MessageBox.Show(
-                        "Chocolatey installation was cancelled or failed.",
+                        "A Chocolatey telepítése meg lett szakítva vagy nem sikerült, így nem fog működni a Package Store tab.",
                         "Chocolatey",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
@@ -41,12 +41,12 @@ namespace XtremeShell5
                 }
                 else
                 {
-                    bmLog.Text = "Chocolatey installed successfully.";
+                    bmLog.Text = "A Chocolatey sikeresen települt.";
                 }
             }
             else
             {
-                bmLog.Text = "WARNING: Chocolatey is not installed. Package Store is unavailable.";
+                bmLog.Text = "FIGYELEM: A Chocolatey nincs telepítve. A Package Store tab nem fog működni.";
                 HidePackageStoreTab();
             }
         }
@@ -184,7 +184,7 @@ namespace XtremeShell5
         {
             try
             {
-                await SetStatusAsync("Please wait...");
+                await SetStatusAsync("Kérlek várj...");
 
                 var ps = @"
 Set-ExecutionPolicy Bypass -Scope Process -Force
@@ -200,8 +200,8 @@ choco upgrade chocolatey -y --no-progress
                     onErr: async s => await AppendLogAsync(s));
 
                 await SetStatusAsync(code == 0
-                    ? "Chocolatey installed/upgraded successfully."
-                    : $"Chocolatey install/upgrade failed (exit {code}).");
+                    ? "A Chocolatey sikeresen települt/frissült."
+                    : $"A Chocolatey telepítése/frissítése nem sikerült (exit {code}).");
             }
             catch (Exception ex)
             {
